@@ -1,0 +1,29 @@
+name: funnsie
+on: push
+jobs: 
+  run-shell-commands:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: echo a strong
+        run: echo "Is this fun yet?"
+      - name: multiline script
+        run: |
+          node -v
+          npm -v
+      - name: python command
+        run: |
+          import platform
+          print
+          (platform.processor())
+        shell: python
+  run-windows-commands:
+    runs-on: windows-latest
+    steps:
+      - name: Powershell
+        run: Get-Location
+      - name: bash
+        run: pwd
+        shell: bash
+
+
+
