@@ -1,13 +1,31 @@
 name: Actions workflow
-on: push
+on: 
+  push:
+    branches:
+      - fun
+# repository_dispatch: 
+#   types: [whatever event_type is in the http request]
+# Also, can add json objecst to the http request.  Those objects become fields on ${{github.event.<object key in http request>}}
 jobs:
   run-actions:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout action
+        uses: actions/checkout@v1
+      - name: List Files
+        run: |
+          pwd
+          ls -a
+          echo $GITHUB_SHA
+          echo $GITHUB_REPOSITORY
+          echo "${{github.token}}"
+        #default env variables
+        #default object in a workflow - setps.objects are accessed with ${{}}
       - name: JS actions
         id: greet
         uses: actions/hello-world-javascript-action@v1
         with: 
           who-to-greet: Xia
       - name: Log time
+       
         run: echo "${{ steps.greet.outputs.time}}"
